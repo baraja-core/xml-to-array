@@ -35,47 +35,57 @@ $xmlstr = <<<EOD
 EOD;
 
 $expected = [
-  "show" => [
+  'show' => [
     [
-      "dog" => 'Brian',
-      "kid" => [
-        "Chris",
-        "Meg",
-        "<em>Stewie</em>",
+      'dog' => 'Brian',
+      'kid' => [
+        'Chris',
+        'Meg',
+        '<em>Stewie</em>',
       ],
-      "@attributes" => ["name" => "Family Guy"],
+      '@attributes' => [
+        'name' => 'Family Guy',
+      ],
     ],
     [
       'pet' => [
-        "@content" => 'Klaus',
-        "@attributes" => ["type" => "fish"],
+        '@content' => 'Klaus',
+        '@attributes' => [
+          'type' => 'fish',
+        ],
       ],
       'alien' => [
         'persona' => [
           'Roger Smith',
           'Sidney Huffman',
         ],
-        "@attributes" => ["nick" => "The Decider"],
-      ],
-      "@attributes" => ["name" => "American Dad!"],
-    ],
-    [
-      "empty" => "",
-      "foo" => [
-        "@attributes" => [
-          "empty" => "",
+        '@attributes' => [
+          'nick' => 'The Decider',
         ],
       ],
-      "zero" => "0",
-      "@attributes" => [
-        "name" => "Edge Cases",
-        "zero" => "0",
-        "empty" => "",
+      '@attributes' => [
+        'name' => 'American Dad!',
+      ],
+    ],
+    [
+      'empty' => '',
+      'foo' => [
+        '@attributes' => [
+          'empty' => '',
+        ],
+      ],
+      'zero' => '0',
+      '@attributes' => [
+        'name' => 'Edge Cases',
+        'zero' => '0',
+        'empty' => '',
       ],
     ],
   ],
-  "@attributes" => ["type" => "cartoon"],
-  "@root" => 'tv',
+  '@attributes' => [
+    'type' => 'cartoon',
+  ],
+  '@root' => 'tv',
 ];
 
 $result = \Baraja\XmlToPhp\Convertor::covertToArray($xmlstr);
