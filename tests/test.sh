@@ -69,8 +69,8 @@ $expected = [
       "zero" => "0",
       "@attributes" => [
         "name" => "Edge Cases",
-        "empty" => "",
         "zero" => "0",
+        "empty" => "",
       ],
     ],
   ],
