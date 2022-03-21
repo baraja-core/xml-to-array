@@ -18,7 +18,7 @@ final class Helper
 	 * @param \DOMElement|\DOMNode $node
 	 * @return mixed[]|string
 	 */
-	public static function domNodeToArray($node)
+	public static function domNodeToArray($node): mixed
 	{
 		$output = [];
 		switch ($node->nodeType) {
