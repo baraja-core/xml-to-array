@@ -40,7 +40,7 @@ final class Helper
 							$v = '';
 						}
 						$output[$t][] = $v;
-						/** @phpstan-ignore-next-line */
+					/** @phpstan-ignore-next-line */
 					} elseif ($v || $v === '0') {
 						$output = (string) $v;
 					}
