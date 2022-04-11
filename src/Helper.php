@@ -35,19 +35,21 @@ final class Helper
 						if (!isset($output[$t])) {
 							$output[$t] = [];
 						}
+						/** @phpstan-ignore-next-line */
 						if (is_array($v) && empty($v)) {
 							$v = '';
 						}
 						$output[$t][] = $v;
+						/** @phpstan-ignore-next-line */
 					} elseif ($v || $v === '0') {
 						$output = (string) $v;
 					}
 				}
-				if ($node->attributes->length && !is_array($output)) { // has attributes but isn't an array
+				if ($node->attributes->length > 0 && !is_array($output)) { // has attributes but isn't an array
 					$output = ['@content' => $output]; // change output into an array.
 				}
 				if (is_array($output)) {
-					if ($node->attributes->length) {
+					if ($node->attributes->length > 0) {
 						$a = [];
 						foreach ($node->attributes as $attrName => $attrNode) {
 							$a[$attrName] = (string) $attrNode->value;

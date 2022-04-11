@@ -21,6 +21,6 @@ final class Convertor
 		$output = (array) Helper::domNodeToArray($root);
 		$output['@root'] = $root->tagName;
 
-		return $output ?? [];
+		return $output;
 	}
 }
