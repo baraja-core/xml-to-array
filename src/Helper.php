@@ -16,19 +16,19 @@ final class Helper
 
 	/**
 	 * @param \DOMElement|\DOMNode $node
-	 * @return mixed[]|string
+	 * @return array<int|string, mixed>|string
 	 */
-	public static function domNodeToArray($node): mixed
+	public static function domNodeToArray($node): array|string
 	{
 		$output = [];
 		switch ($node->nodeType) {
 			case 4: // XML_CDATA_SECTION_NODE
 			case 3: // XML_TEXT_NODE
-				$output = trim($node->textContent);
-				break;
+				return trim($node->textContent);
 			case 1: // XML_ELEMENT_NODE
 				for ($i = 0, $m = $node->childNodes->length; $i < $m; $i++) {
 					$child = $node->childNodes->item($i);
+					assert($child !== null);
 					$v = self::domNodeToArray($child);
 					if (isset($child->tagName)) {
 						$t = $child->tagName;
@@ -42,17 +42,18 @@ final class Helper
 						$output[$t][] = $v;
 					/** @phpstan-ignore-next-line */
 					} elseif ($v || $v === '0') {
-						$output = (string) $v;
+						$output = is_string($v) ? $v : implode(',', $v);
 					}
 				}
-				if ($node->attributes->length > 0 && !is_array($output)) { // has attributes but isn't an array
+				if ($node->attributes !== null && $node->attributes->length > 0 && !is_array($output)) { // has attributes but isn't an array
 					$output = ['@content' => $output]; // change output into an array.
 				}
 				if (is_array($output)) {
-					if ($node->attributes->length > 0) {
+					if ($node->attributes !== null && $node->attributes->length > 0) {
 						$a = [];
 						foreach ($node->attributes as $attrName => $attrNode) {
-							$a[$attrName] = (string) $attrNode->value;
+							/** @var \DOMAttr $attrNode */
+							$a[$attrName] = $attrNode->value;
 						}
 						$output['@attributes'] = $a;
 					}
@@ -65,6 +66,7 @@ final class Helper
 				break;
 		}
 
+		/** @phpstan-ignore-next-line */
 		return $output;
 	}
 }

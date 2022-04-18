@@ -18,6 +18,7 @@ final class Convertor
 		$doc = new \DOMDocument;
 		$doc->loadXML(str_replace(["\r\n", "\r"], "\n", trim($xml)));
 		$root = $doc->documentElement;
+		assert($root !== null);
 		$output = (array) Helper::domNodeToArray($root);
 		$output['@root'] = $root->tagName;
 
