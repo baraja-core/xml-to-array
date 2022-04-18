@@ -45,7 +45,11 @@ final class Helper
 						$output = is_string($v) ? $v : implode(',', $v);
 					}
 				}
-				if ($node->attributes !== null && $node->attributes->length > 0 && !is_array($output)) { // has attributes but isn't an array
+				if (
+					$node->attributes !== null
+					&& $node->attributes->length > 0
+					&& !is_array($output)
+				) { // has attributes but isn't an array
 					$output = ['@content' => $output]; // change output into an array.
 				}
 				if (is_array($output)) {
