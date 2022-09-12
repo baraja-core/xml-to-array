@@ -39,6 +39,7 @@ final class Helper
 						if (is_array($v) && empty($v)) {
 							$v = '';
 						}
+						/** @phpstan-ignore-next-line */
 						$output[$t][] = $v;
 					/** @phpstan-ignore-next-line */
 					} elseif ($v || $v === '0') {
@@ -70,7 +71,6 @@ final class Helper
 				break;
 		}
 
-		/** @phpstan-ignore-next-line */
 		return $output;
 	}
 }
